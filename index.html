@@ -33,7 +33,7 @@
             width: 350px;
             margin: 0 auto;
         }
-        
+
         button {
             border: 0;
             border-radius: 5px;
@@ -56,9 +56,9 @@
             display: none;
             text-align: center;
         }
-        
+
         #choice {
-            display: none;
+            display: block;
             text-align: center;
         }
 
@@ -101,7 +101,7 @@
 
         student.addEventListener("click", () => {
             document.getElementById("choice").style.display = "none";
-            document.getElementById("form").style.display = "block";
+            document.getElementById("main").style.display = "block";
         });
 
         fill.addEventListener("click", () => {
