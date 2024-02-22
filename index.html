@@ -23,6 +23,7 @@
             width: 100%;
             padding: 20px;
             text-align: center;
+            display: none;
         }
 
         h1 {
@@ -100,6 +101,11 @@
         let teacher = document.getElementById("teacher");
 
         student.addEventListener("click", () => {
+            document.getElementById("choice").style.display = "none";
+            document.getElementById("main").style.display = "block";
+        });
+        
+        teacher.addEventListener("click", () => {
             document.getElementById("choice").style.display = "none";
             document.getElementById("main").style.display = "block";
         });
