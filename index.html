@@ -138,13 +138,11 @@
                 document.getElementById("error").innerText = "Введите класс!";
 				return;
             }
-
             let data = {
 				user_name: user_name,
 				user_class: user_class
 			}
 			tg.sendData(JSON.stringify(data));
-
             tg.close();
         });
         done_teacher.addEventListener("click", () => {
@@ -155,13 +153,11 @@
                 document.getElementById("error1").innerText = "Введите имя!";
 				return;
             }
-			
 			let data = {
 				user_name: user_name,
 				user_class: user_class
 			}
 			tg.sendData(JSON.stringify(data));
-			
             tg.close();
         });
     </script>
