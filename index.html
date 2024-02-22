@@ -56,6 +56,11 @@
             display: none;
             text-align: center;
         }
+        
+        #choice {
+            display: none;
+            text-align: center;
+        }
 
         input {
             width: 90%;
@@ -72,6 +77,10 @@
     </style>
 </head>
 <body>
+    <div id="choice">
+        <button id="student">Вход для <b>ученика</b></button>
+        <button id="teacher">Вход для <b>учителя</b></button>
+    </div>
     <div id="main">
         <h1>Авторизация пользователя</h1>
         <p>Введите свои данные</p>
@@ -87,6 +96,13 @@
         let tg = window.Telegram.WebApp;
         let fill = document.getElementById("fill");
         let done = document.getElementById("done");
+        let student = document.getElementById("student");
+        let teacher = document.getElementById("teacher");
+
+        student.addEventListener("click", () => {
+            document.getElementById("choice").style.display = "none";
+            document.getElementById("form").style.display = "block";
+        });
 
         fill.addEventListener("click", () => {
             document.getElementById("main").style.display = "none";
