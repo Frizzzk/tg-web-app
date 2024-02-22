@@ -117,13 +117,13 @@
         student.addEventListener("click", () => {
             document.getElementById("main").style.display = "none";
             document.getElementById("form_student").style.display = "block";
-            document.getElementById("student_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+            document.getElementById("student_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name + "Если имя не совпадает, введите заново";
         });
 
         teacher.addEventListener("click", () => {
             document.getElementById("main").style.display = "none";
             document.getElementById("form_teacher").style.display = "block";
-            document.getElementById("teacher_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+            document.getElementById("teacher_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name + "Если имя не совпадает, введите заново";
         });
 
         done_student.addEventListener("click", () => {
@@ -134,7 +134,7 @@
                 document.getElementById("error").innerText = "Введите имя!";
 				return;
             }
-            if(user_class.length < 2) {
+            else if(user_class.length < 2) {
                 document.getElementById("error").innerText = "Введите класс!";
 				return;
             }
