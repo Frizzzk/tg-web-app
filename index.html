@@ -23,7 +23,6 @@
             width: 100%;
             padding: 20px;
             text-align: center;
-            display: none;
         }
 
         h1 {
@@ -62,13 +61,13 @@
 		    transform: translateY(-7px);
         }
 
-        #form {
+        #form_student {
             display: none;
             text-align: center;
         }
 
-        #choice {
-            display: block;
+        #form_teacher {
+            display: none;
             text-align: center;
         }
 
@@ -87,45 +86,47 @@
     </style>
 </head>
 <body>
-    <div id="choice">
+    <div id="main">
+        <h1>Авторизация пользователя</h1>
+        <p>Введите свои данные, указанные внутри поля для ввода</p><br>
         <button id="student">Вход для <b>ученика</b></button><br>
         <button id="teacher">Вход для <b>учителя</b></button>
     </div>
-    <div id="main">
-        <h1>Авторизация пользователя</h1>
-        <p>Введите свои данные</p><br>
-        <button id="fill">Заполнить</button>
-    </div>
-    <form id="form">
-        <input type="text" placeholder="Имя, Фамилия" id="user_name">
-        <input type="text" placeholder="Класс" id="user_class">
-        <button id="done">Завершить</button>
+    <form id="form_student">
+        <input type="text" placeholder="Имя, Фамилия" id="student_name">
+        <input type="text" placeholder="Класс" id="student_class">
+        <button id="done_student">Отправить</button>
+    </form>
+    <form id="form_teacher">
+        <input type="text" placeholder="Имя, Отчество" id="teacher_name">
+        <input type="text" placeholder="Классное руководство" id="teacher_class">
+        <button id="done_teacher">Отправить</button>
     </form>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         let tg = window.Telegram.WebApp;
         let fill = document.getElementById("fill");
-        let done = document.getElementById("done");
+        let done_student = document.getElementById("done_student");
+        let done_teacher = document.getElementById("done_teacher");
         let student = document.getElementById("student");
         let teacher = document.getElementById("teacher");
 
         student.addEventListener("click", () => {
-            document.getElementById("choice").style.display = "none";
-            document.getElementById("main").style.display = "block";
+            document.getElementById("main").style.display = "none";
+            document.getElementById("form_student").style.display = "block";
+            document.getElementById("student_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
         });
 
         teacher.addEventListener("click", () => {
-            document.getElementById("choice").style.display = "none";
-            document.getElementById("main").style.display = "block";
-        });
-
-        fill.addEventListener("click", () => {
             document.getElementById("main").style.display = "none";
-            document.getElementById("form").style.display = "block";
-            document.getElementById("user_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+            document.getElementById("form_teacher").style.display = "block";
+            document.getElementById("teacher_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
         });
 
-        done.addEventListener("click", () => {
+        done_student.addEventListener("click", () => {
+            tg.close();
+        });
+        done_teacher.addEventListener("click", () => {
             tg.close();
         });
     </script>
