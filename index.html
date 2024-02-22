@@ -13,7 +13,7 @@
             box-sizing: border-box;
         }
         body {
-          font-family: 'Times New Roman', sans-serif;
+          font-family: 'Times New Roman', serif;
           font-weight: 200;
           color: var(--tg-theme-text-color);
           background: var(--tg-theme-bg-color);
@@ -94,12 +94,14 @@
     </div>
     <form id="form_student">
         <input type="text" placeholder="Имя, Фамилия" id="student_name">
-        <input type="text" placeholder="Класс" id="student_class">
+        <input type="text" placeholder='Класс (1 "А")' id="student_class">
+        <div id="error"></div>
         <button id="done_student">Отправить</button>
     </form>
     <form id="form_teacher">
         <input type="text" placeholder="Имя, Отчество" id="teacher_name">
-        <input type="text" placeholder="Классное руководство" id="teacher_class">
+        <input type="text" placeholder='Классное руководство (1 "А")' id="teacher_class">
+        <div id="error1"><p>Если Вы не являетесь классным руководителем, оставьте это поле пустым</p></div>
         <button id="done_teacher">Отправить</button>
     </form>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -110,6 +112,7 @@
         let done_teacher = document.getElementById("done_teacher");
         let student = document.getElementById("student");
         let teacher = document.getElementById("teacher");
+        tg.expand();
 
         student.addEventListener("click", () => {
             document.getElementById("main").style.display = "none";
@@ -124,9 +127,41 @@
         });
 
         done_student.addEventListener("click", () => {
+			document.getElementById("error").innerText = ""
+            let user_name = document.getElementById("student_name").value;
+            let user_class = document.getElementById("student_class").value;
+            if(user_name.length < 2) {
+                document.getElementById("error").innerText = "Введите имя!";
+				return;
+            }
+            if(user_class.length < 2) {
+                document.getElementById("error").innerText = "Введите класс!";
+				return;
+            }
+
+            let data = {
+				user_name: user_name,
+				user_class: user_class
+			}
+			tg.sendData(JSON.stringify(data));
+
             tg.close();
         });
         done_teacher.addEventListener("click", () => {
+            document.getElementById("error1").innerText = ""
+            let user_name = document.getElementById("teacher_name").value;
+            let user_class = document.getElementById("teacher_class").value;
+            if(user_name.length < 2) {
+                document.getElementById("error1").innerText = "Введите имя!";
+				return;
+            }
+			
+			let data = {
+				user_name: user_name,
+				user_class: user_class
+			}
+			tg.sendData(JSON.stringify(data));
+			
             tg.close();
         });
     </script>
