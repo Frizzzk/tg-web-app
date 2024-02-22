@@ -86,12 +86,12 @@
     <script>
         let tg = window.Telegram.WebApp;
         let fill = document.getElementById("fill");
-        let order = document.getElementById("done") ;
+        let done = document.getElementById("done");
 
-        fill.addEventListener(“click", () => {
+        fill.addEventListener("click", () => {
             document.getElementById("main").style.display = "none";
             document.getElementById("form").style.display = "block";
-            document.getElementById("user_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name
+            document.getElementById("user_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
         });
 
         done.addEventListener("click", () => {
