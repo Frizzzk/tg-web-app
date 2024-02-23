@@ -153,8 +153,8 @@
                 document.getElementById("error1").innerText = "Заполните поле Имя!";
 				return;
             }
-			let data = {
-				user_name: user_name,
+			let data = { 
+				user_name: user_name
 				user_class: user_class
 			}
 			tg.sendData(JSON.stringify(data));
