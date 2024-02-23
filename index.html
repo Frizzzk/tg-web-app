@@ -84,31 +84,6 @@
             border-color: #db5d5d;
         }
 
-        a.button {
-            text-decoration: none;
-            display: inline-block;
-            width: 270px;
-            height: 45px;
-            line-height: 45px;
-            border-radius: 5px;
-            margin: 10px 20px;
-            font-family: 'Times New Roman', sans-serif;
-            font-size: 11px;
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 3px;
-            font-weight: 600;
-            color: #524f4e;
-            background: #FFFFF0;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, .3);
-            transition: .3s;
-        }
-        a.button:hover {
-            background: #2EE59D;
-		    box-shadow: 0 15px 20px rgba(46, 229, 157, .4);
-		    color: white;
-		    transform: translateY(-7px);
-        }
     </style>
 </head>
 <body>
@@ -123,17 +98,8 @@
         <input type="text" placeholder='Класс (1 "А")' id="student_class">
         <input type="text" placeholder='Ссылка на профиль в ВК (https://vk.com/user_name)' id="student_vk">
         <div id="student_error"></div><br>
-        <button id="stud_btn_vk">Перейти в ВК</button><br>
-        <button id="done_student">Отправить</button><br>
-        <a href="https://google.com" class="button">Go to Google</a><br>
-        <button class="button" onclick="window.location.href = 'https://vk.com/';">
-            Перейти в ВК
-        </button>
-        <a href='https://vk.com/'>
-            <button class="GFG">
-                Перейти в ВК
-            </button>
-        </a>
+        <input type="button" onclick="window.location.href = 'https://vk.com/';" value="Перейти в ВК"/>
+        <button id="done_student">Отправить</button>
     </form>
     <form id="form_teacher">
         <input type="text" placeholder="Имя, Отчество (Марья Ивановна)" id="teacher_name">
@@ -172,6 +138,7 @@
 			document.getElementById("student_error").innerText = ""
             let user_name = document.getElementById("student_name").value;
             let user_class = document.getElementById("student_class").value;
+            let user_vk = document.getElementById("student_vk").value;
             if(user_name.length < 2) {
                 document.getElementById("student_error").innerText = "Заполните поле Имя!";
 				return;
@@ -180,9 +147,14 @@
                 document.getElementById("student_error").innerText = "Ошибка в поле Класс!";
 				return;
             }
+            else if(user_vk.length < 17) {
+                document.getElementById("student_error").innerText = "Заполните поле ВК!";
+				return;
+            }
             let data = {
 				user_name: user_name,
-				user_class: user_class
+				user_class: user_class,
+				user_vk: user_vk
 			}
 			tg.sendData(JSON.stringify(data));
             tg.close();
@@ -191,13 +163,19 @@
             document.getElementById("teacher_error").innerText = ""
             let user_name = document.getElementById("teacher_name").value;
             let user_class = document.getElementById("teacher_class").value;
+            let user_vk = document.getElementById("teacher_vk").value;
             if(user_name.length < 2) {
                 document.getElementById("teacher_error").innerText = "Заполните поле Имя!";
 				return;
             }
+            else if(user_vk.length < 17) {
+                document.getElementById("teacher_error").innerText = "Заполните поле ВК!";
+				return;
+            }
 			let data = {
 				user_name: user_name,
-				user_class: user_class
+				user_class: user_class,
+				user_vk: user_vk
 			}
 			tg.sendData(JSON.stringify(data));
             tg.close();
