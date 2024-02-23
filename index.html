@@ -93,7 +93,7 @@
         <button id="teacher">Вход для <b>учителя</b></button>
     </div>
     <form id="form_student">
-        <input type="text" placeholder="Имя, Фамилия" id="student_name">
+        <input type="text" placeholder="Фамилия, Имя (укажите в такой последовательности)" id="student_name">
         <input type="text" placeholder='Класс (1 "А")' id="student_class">
         <div id="error"></div>
         <button id="done_student">Отправить</button>
@@ -131,11 +131,11 @@
             let user_name = document.getElementById("student_name").value;
             let user_class = document.getElementById("student_class").value;
             if(user_name.length < 2) {
-                document.getElementById("error").innerText = "Введите имя!";
+                document.getElementById("error").innerText = "Заполните поле Имя!";
 				return;
             }
-            else if(user_class.length < 2) {
-                document.getElementById("error").innerText = "Введите класс!";
+            else if(user_class.length < 2 or user_class.length > 6) {
+                document.getElementById("error").innerText = "Ошибка в поле Класс!";
 				return;
             }
             let data = {
@@ -150,7 +150,7 @@
             let user_name = document.getElementById("teacher_name").value;
             let user_class = document.getElementById("teacher_class").value;
             if(user_name.length < 2) {
-                document.getElementById("error1").innerText = "Введите имя!";
+                document.getElementById("error1").innerText = "Заполните поле Имя!";
 				return;
             }
 			let data = {
