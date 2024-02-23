@@ -61,6 +61,33 @@
 		    transform: translateY(-7px);
         }
 
+        button2: {
+            text-decoration: none;
+            display: inline-block;
+            width: 270px;
+            height: 45px;
+            line-height: 45px;
+            border-radius: 5px;
+            margin: 10px 20px;
+            font-family: 'Times New Roman', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 3px;
+            font-weight: 600;
+            color: #524f4e;
+            background: #FFFFF0;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, .3);
+            transition: .3s;
+        }
+
+        button2:hover {
+            background: #2EE59D;
+		    box-shadow: 0 15px 20px rgba(46, 229, 157, .4);
+		    color: white;
+		    transform: translateY(-7px);
+        }
+
         #form_student {
             display: none;
             text-align: center;
@@ -91,14 +118,15 @@
         <h1>Авторизация пользователя</h1>
         <p>Введите свои данные, указанные внутри поля для ввода</p><br>
         <button id="student">Вход для <b>ученика</b></button><br>
-        <button id="teacher">Вход для <b>учителя</b></button>
+        <button id="teacher">Вход для <b>учителя</b></button><br>
+        <button id="guest">Войти как <b>гость</b></button>
     </div>
     <form id="form_student">
         <input type="text" placeholder="Фамилия, Имя (Иванов Иван)" id="student_name">
         <input type="text" placeholder='Класс (1 "А")' id="student_class">
         <input type="text" placeholder='Ссылка на профиль в ВК (https://vk.com/user_name)' id="student_vk">
         <div id="student_error"></div><br>
-        <input type="button" onclick="window.location.href = 'https://vk.com/';" value="Перейти в ВК"/>
+        <input class="button2" type="button" onclick="window.location.href = 'https://vk.com/';" value="Перейти в ВК"/>
         <button id="done_student">Отправить</button>
     </form>
     <form id="form_teacher">
@@ -107,7 +135,7 @@
         <p>Если Вы не являетесь классным руководителем, оставьте это поле пустым</p><br>
         <input type="text" placeholder='Ссылка на профиль в ВК (https://vk.com/user_name)' id="teacher_vk">
         <div id="teacher_error">Если у Вас нет профиля в ВК, оставьте это поле пустым</div><br>
-        <button id="teach_btn_vk">Перейти в ВК</button><br>
+        <input class="button2" type="button" onclick="window.location.href = 'https://vk.com/';" value="Перейти в ВК"/>
         <button id="done_teacher">Отправить</button>
     </form>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -118,6 +146,7 @@
         let done_teacher = document.getElementById("done_teacher");
         let student = document.getElementById("student");
         let teacher = document.getElementById("teacher");
+        let guest = document.getElementById("guest");
         tg.expand();
 
         student.addEventListener("click", () => {
@@ -130,6 +159,17 @@
             document.getElementById("main").style.display = "none";
             document.getElementById("form_teacher").style.display = "block";
             document.getElementById("teacher_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name + "Если имя не совпадает, введите заново";
+        });
+
+        guest.addEventListener("click", () => {
+            let data = {
+                role: "guest",
+				user_name: "None",
+				user_class: "None",
+				user_vk: "None"
+			}
+			tg.sendData(JSON.stringify(data));
+            tg.close();
         });
 
         done_student.addEventListener("click", () => {
@@ -150,6 +190,7 @@
 				return;
             }
             let data = {
+                role: "student",
 				user_name: user_name,
 				user_class: user_class,
 				user_vk: user_vk
@@ -171,6 +212,7 @@
 				return;
             }
 			let data = {
+			    role: "teacher",
 				user_name: user_name,
 				user_class: user_class,
 				user_vk: user_vk
