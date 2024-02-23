@@ -191,7 +191,7 @@
             }
             let data = {
                 role: "student",
-				user_name: user_name,
+				user_name: [user_name],
 				user_class: user_class,
 				user_vk: user_vk
 			}
@@ -207,13 +207,9 @@
                 document.getElementById("teacher_error").innerText = "Заполните поле Имя!";
 				return;
             }
-            else if(user_vk.length < 17) {
-                document.getElementById("teacher_error").innerText = "Заполните поле ВК!";
-				return;
-            }
 			let data = {
 			    role: "teacher",
-				user_name: user_name,
+				user_name: [user_name],
 				user_class: user_class,
 				user_vk: user_vk
 			}
