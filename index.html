@@ -107,6 +107,8 @@
         <input type="text" placeholder="Имя, Отчество (Марья Ивановна)" id="teacher_name">
         <input type="text" placeholder='Классное руководство (1А)' id="teacher_class">
         <p>Если Вы не являетесь классным руководителем, оставьте это поле пустым</p><br>
+        <input type="text" placeholder='Преподаваемые предметы (математика, алгебра, геометрия)' id="teacher_subjects">
+        <input type="text" placeholder='Преподаваемые классы (1А, 1Б, 2А)' id="teacher_classes">
         <input type="text" placeholder='Ссылка на профиль в ВК (https://vk.com/user_name)' id="teacher_vk">
         <div id="teacher_error">Если у Вас нет профиля в ВК, оставьте это поле пустым</div><br>
         <input class="button2" type="button" onclick="window.location.href = 'https://vk.com/';" value="Перейти в ВК"/>
@@ -156,7 +158,7 @@
                 document.getElementById("student_error").innerText = "Заполните поле Имя!";
 				return;
             }
-            else if(user_class.length < 2 || user_class.length > 6) {
+            else if(user_class.length < 2 || user_class.length > 3) {
                 document.getElementById("student_error").innerText = "Ошибка в поле Класс!";
 				return;
             }
@@ -178,15 +180,27 @@
             let user_name = document.getElementById("teacher_name").value;
             let user_class = document.getElementById("teacher_class").value;
             let user_vk = document.getElementById("teacher_vk").value;
+            let teacher_classes = document.getElementById("teacher_classes").value;
+            let teacher_subjects = document.getElementById("teacher_subjects").value;
             if(user_name.length < 2) {
                 document.getElementById("teacher_error").innerText = "Заполните поле Имя!";
+				return;
+            }
+            else if(teacher_subjects.length < 3) {
+                document.getElementById("teacher_error").innerText = "Заполните поле Преподаваемые предметы!";
+				return;
+            }
+            else if(teacher_classes.length < 2) {
+                document.getElementById("teacher_error").innerText = "Заполните поле Преподаваемые классы!";
 				return;
             }
 			let data = {
 			    role: "teacher",
 				user_name: user_name,
 				user_class: user_class,
-				user_vk: user_vk
+				user_vk: user_vk,
+				teacher_classes: teacher_classes,
+				teacher_subjects: teacher_subjects
 			}
 			tg.sendData(JSON.stringify(data));
             tg.close();
